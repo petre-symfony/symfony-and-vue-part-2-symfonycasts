@@ -3,7 +3,7 @@
     <Loading v-if="loading" />
 
     <div v-if="product">
-      <title-component />
+      <title-component :text="product.name"/>
     </div>
   </div>
 </template>
