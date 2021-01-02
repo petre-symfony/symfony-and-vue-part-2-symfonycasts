@@ -56,6 +56,14 @@ export default {
     price() {
       return formatPrice(this.product.price);
     },
+    productUrl() {
+      return `/product/${this.product.id}`
+    }
+  },
+  methods: {
+    goToProduct() {
+      window.location = this.productUrl
+    }
   },
 };
 </script>
