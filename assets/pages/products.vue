@@ -11,10 +11,8 @@
       </aside>
 
       <div :class="contentClass">
-        {{ currentProductId }}
-        <product-show />
-        
-        <catalog
+        <component
+          :is="currentComponent"
           :current-category-id="currentCategoryId"
           :categories="categories"
         />
@@ -53,7 +51,10 @@ export default {
     },
     currentProductId() {
       return getCurrentProductId();
-    }
+    },
+    currentComponent() {
+      return this.currentProductId ?? null !== null ? ProductShow : Catalog;
+    },
   },
   async created() {
     const response = await fetchCategories();
