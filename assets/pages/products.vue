@@ -12,6 +12,8 @@
 
       <div :class="contentClass">
         {{ currentProductId }}
+        <product-show />
+        
         <catalog
           :current-category-id="currentCategoryId"
           :categories="categories"
@@ -26,12 +28,14 @@ import Catalog from '@/components/catalog';
 import Sidebar from '@/components/sidebar';
 import { getCurrentCategoryId, getCurrentProductId } from '@/services/page-context';
 import { fetchCategories } from '@/services/categories-service';
+import ProductShow from '@/components/product-show';
 
 export default {
   name: 'Products',
   components: {
     Catalog,
     Sidebar,
+    ProductShow
   },
   data() {
     return {
