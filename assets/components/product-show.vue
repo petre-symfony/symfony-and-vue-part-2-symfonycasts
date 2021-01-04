@@ -47,6 +47,10 @@
                   @click="addToCart"
               >
                 Add to Cart
+                <i
+                    v-show="addToCartLoading"
+                    class="fas fa-spinner fa-spin"
+                />
               </button>
             </div>
           </div>
@@ -80,6 +84,7 @@ export default {
   data() {
     return {
       cart: null,
+      addToCartLoading: false,
       product: null,
       loading: true
     }
@@ -94,12 +99,14 @@ export default {
     }
   },
   methods: {
-    addToCart() {
-      addItemToCart(this.cart, {
+    async addToCart() {
+      this.addToCartLoading = true
+      await addItemToCart(this.cart, {
         product: this.product['@id'],
         color: null,
         quantity: 1
       })
+      this.addToCartLoading = false
     }
   },
   async created(){
