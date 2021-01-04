@@ -37,6 +37,7 @@
                   v-if="product.colors.length !== 0"
               />
               <input
+                  v-model.number="quantity"
                   class="form-control mx-3"
                   type="number"
                   min="1"
@@ -91,7 +92,8 @@ export default {
       addToCartLoading: false,
       addToCartSuccess: false,
       product: null,
-      loading: true
+      loading: true,
+      quantity: 1
     }
   },
   computed: {
@@ -110,7 +112,7 @@ export default {
       await addItemToCart(this.cart, {
         product: this.product['@id'],
         color: null,
-        quantity: 1
+        quantity: this.quantity
       })
       this.addToCartLoading = false
       this.addToCartSuccess = true
