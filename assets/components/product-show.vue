@@ -35,6 +35,7 @@
             <div class="d-flex align-items-center justify-content-center">
               <color-selector
                   v-if="product.colors.length !== 0"
+                  @color-selected="updateSelectedColor"
               />
               <input
                   v-model.number="quantity"
@@ -71,7 +72,7 @@ import Loading from '@/components/loading'
 import TitleComponent from '@/components/title'
 import ColorSelector from '@/components/color-selector'
 import formatPrice from '@/helpers/format-price'
-import { fetchCart, addItemToCart } from '@/services/cart-service'
+import { fetchCart, addItemToCart, getCartTotalItems } from '@/services/cart-service'
 
 export default {
   name: 'ProductShow',
@@ -93,7 +94,8 @@ export default {
       addToCartSuccess: false,
       product: null,
       loading: true,
-      quantity: 1
+      quantity: 1,
+      selectedColorId: null
     }
   },
   computed: {
@@ -107,15 +109,28 @@ export default {
   },
   methods: {
     async addToCart() {
+      if (this.product.colors.length && this.selectedColorId === null) {
+        alert('Please select a color first!')
+
+        return
+      }
+
       this.addToCartLoading = true
       this.addToCartSuccess = false
       await addItemToCart(this.cart, {
         product: this.product['@id'],
-        color: null,
+        color: this.selectedColorId,
         quantity: this.quantity
       })
       this.addToCartLoading = false
       this.addToCartSuccess = true
+
+      document
+        .getElementById('js-shopping-cart-items')
+        .innerHTML = getCartTotalItems(this.cart).toString()
+    },
+    updateSelectedColor(iri) {
+      this.selectedColorId = iri
     }
   },
   async created(){
