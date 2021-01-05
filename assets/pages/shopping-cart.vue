@@ -12,9 +12,12 @@
   </div>
 </template>
 <script>
-import TitleComponent from '@/components/title';
+import TitleComponent from '@/components/title'
+import ShoppingCartMixin from '@/mixins/get-shopping-cart'
+
 export default {
   name: 'ShoppingCart',
+  mixins: [ShoppingCartMixin],
   components: {
     TitleComponent,
   },

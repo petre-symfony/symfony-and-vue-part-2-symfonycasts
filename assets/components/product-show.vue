@@ -73,7 +73,6 @@ import TitleComponent from '@/components/title'
 import ColorSelector from '@/components/color-selector'
 import formatPrice from '@/helpers/format-price'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
-import { addItemToCart, getCartTotalItems } from '@/services/cart-service'
 
 export default {
   name: 'ProductShow',
@@ -107,6 +106,9 @@ export default {
     }
   },
   methods: {
+    addToCart() {
+      this.addProductToCart(this.product, this.selectedColorId, this.quantity)
+    },
     updateSelectedColor(iri) {
       this.selectedColorId = iri
     }

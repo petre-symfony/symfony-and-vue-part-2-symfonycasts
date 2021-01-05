@@ -1,4 +1,5 @@
 import { fetchCart } from '@/services/cart-service'
+import { addItemToCart, getCartTotalItems } from '@/services/cart-service'
 
 export default {
   data() {
@@ -12,8 +13,8 @@ export default {
     this.cart = await fetchCart();
   },
   methods: {
-    async addToCart() {
-      if (this.product.colors.length && this.selectedColorId === null) {
+    async addProductToCart(product, selectedColorId, quantity) {
+      if (product.colors.length && selectedColorId === null) {
         alert('Please select a color first!')
 
         return
@@ -22,9 +23,9 @@ export default {
       this.addToCartLoading = true
       this.addToCartSuccess = false
       await addItemToCart(this.cart, {
-        product: this.product['@id'],
-        color: this.selectedColorId,
-        quantity: this.quantity
+        product: product['@id'],
+        color: selectedColorId,
+        quantity
       })
       this.addToCartLoading = false
       this.addToCartSuccess = true
