@@ -5,15 +5,15 @@
       <div class="col-xs-12 col-lg-9">
         <title-component text="Shopping Cart" />
         <div class="content p-3">
-         <loading v-if="cart === null" />
-         <div v-if="cart !== null">
+         <loading v-if="completeCart === null" />
+         <div v-if="completeCart !== null">
            <div
-               v-for="(cartItem, index) in cart.items"
+               v-for="(cartItem, index) in completeCart.items"
                :key="index"
            >
-             {{ cartItem.product }} {{ cartItem.quantity }}
+             {{ cartItem.product.name }} {{ cartItem.quantity }}
            </div>
-           <div v-if="cart.items.length === 0">
+           <div v-if="completeCart.items.length === 0">
              Your cart is empty! Get to shopping!
            </div>
          </div>
@@ -30,26 +30,42 @@ import { fetchProductsById } from '@/services/products-service'
 
 export default {
   name: 'ShoppingCart',
+  data() {
+    return {
+      products: null
+    }
+  },
   mixins: [ShoppingCartMixin],
   components: {
     TitleComponent,
     Loading
   },
-  watch: {
-    async cart() {
-      const productIds = this.cart.items.map((item) => item.product)
-      const productResponse = await fetchProductsById(productIds)
-      const products = productResponse.data['hydra:member'];
+  computed: {
+    completeCart() {
+      if (!this.cart || !this.products){
+        return null
+      }
 
       const completeItems = this.cart.items.map((cartItem) => (
         {
-          product: products.find((product) => product['@id'] === cartItem.product),
+          product: this.products.find((product) => product['@id'] === cartItem.product),
           color: cartItem.color,
           quantity: cartItem.quantity
         }
       ))
 
-      console.log(completeItems)
+      return {
+        items: completeItems
+      }
+    }
+  }
+  ,
+  watch: {
+    async cart() {
+      const productIds = this.cart.items.map((item) => item.product)
+      const productResponse = await fetchProductsById(productIds)
+      this.products = productResponse.data['hydra:member'];
+
     }
   }
 };
