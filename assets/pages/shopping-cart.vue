@@ -39,7 +39,17 @@ export default {
     async cart() {
       const productIds = this.cart.items.map((item) => item.product)
       const productResponse = await fetchProductsById(productIds)
-      console.log(productResponse, this.cart)
+      const products = productResponse.data['hydra:member'];
+
+      const completeItems = this.cart.items.map((cartItem) => (
+        {
+          product: products.find((product) => product['@id'] === cartItem.product),
+          color: cartItem.color,
+          quantity: cartItem.quantity
+        }
+      ))
+
+      console.log(completeItems)
     }
   }
 };
