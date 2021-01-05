@@ -26,6 +26,7 @@
 import TitleComponent from '@/components/title'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
+import { fetchProductsById } from '@/services/products-service'
 
 export default {
   name: 'ShoppingCart',
@@ -34,6 +35,13 @@ export default {
     TitleComponent,
     Loading
   },
+  watch: {
+    async cart() {
+      const productIds = this.cart.items.map((item) => item.product)
+      const productResponse = await fetchProductsById(productIds)
+      console.log(productResponse, this.cart)
+    }
+  }
 };
 </script>
 <style lang="scss" module>
