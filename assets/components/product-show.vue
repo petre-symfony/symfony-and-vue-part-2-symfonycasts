@@ -91,8 +91,6 @@ export default {
   },
   data() {
     return {
-      addToCartLoading: false,
-      addToCartSuccess: false,
       product: null,
       loading: true,
       quantity: 1,
@@ -109,27 +107,6 @@ export default {
     }
   },
   methods: {
-    async addToCart() {
-      if (this.product.colors.length && this.selectedColorId === null) {
-        alert('Please select a color first!')
-
-        return
-      }
-
-      this.addToCartLoading = true
-      this.addToCartSuccess = false
-      await addItemToCart(this.cart, {
-        product: this.product['@id'],
-        color: this.selectedColorId,
-        quantity: this.quantity
-      })
-      this.addToCartLoading = false
-      this.addToCartSuccess = true
-
-      document
-        .getElementById('js-shopping-cart-items')
-        .innerHTML = getCartTotalItems(this.cart).toString()
-    },
     updateSelectedColor(iri) {
       this.selectedColorId = iri
     }
