@@ -5,19 +5,11 @@
       <div class="col-xs-12 col-lg-9">
         <title-component text="Shopping Cart" />
         <div class="content p-3">
-         <loading v-if="completeCart === null" />
-         <div v-if="completeCart !== null">
-           <div
-               v-for="(cartItem, index) in completeCart.items"
-               :key="index"
-           >
-             {{ cartItem.product.name }} {{ cartItem.quantity }}
-             {{ cartItem.color ? cartItem.color.hexColor : '' }}
-           </div>
-           <div v-if="completeCart.items.length === 0">
-             Your cart is empty! Get to shopping!
-           </div>
-         </div>
+          <loading v-if="completeCart === null" />
+          <shopping-cart-list
+              v-if="completeCart"
+              :items="completeCart.items"
+          />
         </div>
       </div>
     </div>
@@ -29,6 +21,7 @@ import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
 import { fetchProductsById } from '@/services/products-service'
 import { fetchColors } from '@/services/colors-service'
+import ShoppingCartList from '@/components/shopping-cart'
 
 export default {
   name: 'ShoppingCart',
@@ -41,7 +34,8 @@ export default {
   mixins: [ShoppingCartMixin],
   components: {
     TitleComponent,
-    Loading
+    Loading,
+    ShoppingCartList
   },
   computed: {
     completeCart() {
