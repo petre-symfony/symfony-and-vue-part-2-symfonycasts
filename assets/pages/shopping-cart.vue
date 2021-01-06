@@ -12,6 +12,7 @@
                :key="index"
            >
              {{ cartItem.product.name }} {{ cartItem.quantity }}
+             {{ cartItem.color ? cartItem.color.hexColor : '' }}
            </div>
            <div v-if="completeCart.items.length === 0">
              Your cart is empty! Get to shopping!
@@ -27,12 +28,14 @@ import TitleComponent from '@/components/title'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
 import { fetchProductsById } from '@/services/products-service'
+import { fetchColors } from '@/services/colors-service'
 
 export default {
   name: 'ShoppingCart',
   data() {
     return {
-      products: null
+      products: null,
+      colors: null
     }
   },
   mixins: [ShoppingCartMixin],
@@ -42,14 +45,14 @@ export default {
   },
   computed: {
     completeCart() {
-      if (!this.cart || !this.products){
+      if (!this.cart || !this.products || !this.colors){
         return null
       }
 
       const completeItems = this.cart.items.map((cartItem) => (
         {
           product: this.products.find((product) => product['@id'] === cartItem.product),
-          color: cartItem.color,
+          color: this.colors.find((color) => color['@id'] === cartItem.color),
           quantity: cartItem.quantity
         }
       ))
@@ -64,7 +67,10 @@ export default {
     async cart() {
       const productIds = this.cart.items.map((item) => item.product)
       const productResponse = await fetchProductsById(productIds)
-      this.products = productResponse.data['hydra:member'];
+      const colorsResponse = await fetchColors()
+
+      this.products = productResponse.data['hydra:member']
+      this.colors = colorsResponse.data['hydra:member']
 
     }
   }
