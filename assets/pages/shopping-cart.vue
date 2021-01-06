@@ -61,19 +61,21 @@ export default {
         items: completeItems
       }
     }
-  }
-  ,
+  },
   watch: {
     async cart() {
+      this.loadProducts()
+    }
+  },
+  async created() {
+    this.colors = (await fetchColors()).data['hydra:member']
+  },
+  methods: {
+    async loadProducts() {
       const productIds = this.cart.items.map((item) => item.product)
-      const [productResponse, colorsResponse] = await Promise.all([
-        fetchProductsById(productIds),
-        fetchColors()
-      ])
+      const productsResponse = await fetchProductsById(productIds)
 
-      this.products = productResponse.data['hydra:member']
-      this.colors = colorsResponse.data['hydra:member']
-
+      this.products = productsResponse.data['hydra:member']
     }
   }
 };
