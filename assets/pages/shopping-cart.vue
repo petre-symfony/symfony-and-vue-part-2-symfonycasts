@@ -21,6 +21,7 @@ import TitleComponent from '@/components/title'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
 import { fetchProductsById } from '@/services/products-service'
+import { updateCartItemQuantity } from '@/services/cart-service'
 import { fetchColors } from '@/services/colors-service'
 import ShoppingCartList from '@/components/shopping-cart'
 
@@ -76,7 +77,7 @@ export default {
       this.products = productsResponse.data['hydra:member']
     },
     updateQuantity({productId, colorId, quantity}) {
-      console.log(productId, colorId, quantity);
+      updateCartItemQuantity(this.cart, productId, colorId, quantity);
     }
   }
 };
