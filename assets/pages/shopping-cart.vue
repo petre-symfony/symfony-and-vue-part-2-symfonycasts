@@ -9,6 +9,7 @@
           <shopping-cart-list
               v-if="completeCart"
               :items="completeCart.items"
+              @update-quantity="updateQuantity"
           />
         </div>
       </div>
@@ -73,6 +74,9 @@ export default {
       const productsResponse = await fetchProductsById(productIds)
 
       this.products = productsResponse.data['hydra:member']
+    },
+    updateQuantity({productId, colorId, quantity}) {
+      console.log(productId, colorId, quantity);
     }
   }
 };
