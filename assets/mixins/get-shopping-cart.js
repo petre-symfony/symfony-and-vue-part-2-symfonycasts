@@ -2,7 +2,8 @@ import {
   fetchCart,
   addItemToCart,
   getCartTotalItems,
-  updateCartItemQuantity
+  updateCartItemQuantity,
+  removeItemFromCart
 } from '@/services/cart-service'
 
 export default {
@@ -39,6 +40,12 @@ export default {
 
     async updateProductQuantity(productId, colorId, quantity) {
       await updateCartItemQuantity(this.cart, productId, colorId, quantity);
+
+      this.updateCartHeaderTotal()
+    },
+
+    async removeProductFromCart(productId, colorId) {
+      await removeItemFromCart(this.cart, productId, colorId)
 
       this.updateCartHeaderTotal()
     },

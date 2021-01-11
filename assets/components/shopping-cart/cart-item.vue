@@ -28,7 +28,12 @@
     </div>
 
     <div class="col-3">
-      <button class="btn btn-info btn-sm">Remove</button>
+      <button
+          class="btn btn-info btn-sm"
+          @click="$emit('remove-from-cart')"
+      >
+        Remove
+      </button>
     </div>
   </div>
 </template>

@@ -10,6 +10,10 @@
               v-if="completeCart"
               :items="completeCart.items"
               @update-quantity="updateQuantity"
+              @remove-from-cart="removeProductFromCart(
+                $event.productId,
+                $event.colorId
+              )"
           />
         </div>
       </div>
@@ -21,7 +25,6 @@ import TitleComponent from '@/components/title'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
 import { fetchProductsById } from '@/services/products-service'
-import { updateCartItemQuantity } from '@/services/cart-service'
 import { fetchColors } from '@/services/colors-service'
 import ShoppingCartList from '@/components/shopping-cart'
 
