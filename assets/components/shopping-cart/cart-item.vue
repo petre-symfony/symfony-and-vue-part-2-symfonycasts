@@ -55,8 +55,6 @@ export default {
   methods: {
     updateQuantity(event) {
       this.$emit('update-quantity', {
-        productId: this.item.product['@id'],
-        colorId: this.item.color ? this.item.color['@id'] : null,
         quantity: parseFloat(event.target.value)
       })
     }

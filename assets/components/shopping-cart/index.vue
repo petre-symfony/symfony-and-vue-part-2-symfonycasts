@@ -22,7 +22,11 @@
           v-for="item in items"
           :key="item.id"
           :item="item"
-          @update-quantity="$emit('update-quantity', $event)"
+          @update-quantity="$emit('update-quantity', {
+            productId: item.product['@id'],
+            colorId: item.color ? item.color['@id'] : null,
+            quantity: $event.quantity
+          })"
       />
 
       <div class="p-3">
