@@ -1,7 +1,12 @@
 <template>
   <div :class="[$style.component, 'container-fluid']">
     <div class="row">
-      <aside class="col-xs-12 col-lg-3" />
+			<aside class="col-xs-12 col-lg-3" >
+				<cart-sidebar
+						v-if="featuredProduct"
+						:featured-product="featuredProduct"
+				/>
+			</aside>
       <div class="col-xs-12 col-lg-9">
         <title-component text="Shopping Cart" />
         <div class="content p-3">
@@ -27,6 +32,7 @@ import Loading from '@/components/loading'
 import { fetchProductsById, fetchFeaturedProducts } from '@/services/products-service'
 import { fetchColors } from '@/services/colors-service'
 import ShoppingCartList from '@/components/shopping-cart'
+import CartSidebar from '@/components/shopping-cart/cart-sidebar'
 
 export default {
   name: 'ShoppingCart',
@@ -41,7 +47,8 @@ export default {
   components: {
     TitleComponent,
     Loading,
-    ShoppingCartList
+    ShoppingCartList,
+		CartSidebar
   },
   computed: {
     completeCart() {
