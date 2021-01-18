@@ -24,7 +24,7 @@
 import TitleComponent from '@/components/title'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
 import Loading from '@/components/loading'
-import { fetchProductsById } from '@/services/products-service'
+import { fetchProductsById, fetchFeaturedProducts } from '@/services/products-service'
 import { fetchColors } from '@/services/colors-service'
 import ShoppingCartList from '@/components/shopping-cart'
 
@@ -33,7 +33,8 @@ export default {
   data() {
     return {
       products: null,
-      colors: null
+      colors: null,
+			featuredProduct: null
     }
   },
   mixins: [ShoppingCartMixin],
@@ -81,7 +82,16 @@ export default {
     },
     updateQuantity({productId, colorId, quantity}) {
       this.updateProductQuantity(productId, colorId, quantity)
-    }
+    },
+		async loadFeaturedProducts() {
+    	const featuredProducts = (await fetchFeaturedProducts()).data['hydra:member']
+
+			if (featuredProducts.length === 0) {
+				return
+			}
+
+			this.featuredProduct = featuredProducts[0]
+		}
   }
 };
 </script>
