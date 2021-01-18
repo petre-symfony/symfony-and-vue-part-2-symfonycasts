@@ -32,7 +32,12 @@
             Price: <strong>${{ price }}</strong>
           </div>
           <div class="col-8 p-3">
-            Todo
+            <cart-add-controls
+							:product="product"
+							:allow-add-to-cart="cart !== null"
+							:add-to-cart-loading="addToCartLoading"
+							:add-to-cart-success="addToCartSuccess"
+						/>
           </div>
         </div>
       </div>
@@ -46,12 +51,14 @@ import Loading from '@/components/loading'
 import TitleComponent from '@/components/title'
 import formatPrice from '@/helpers/format-price'
 import ShoppingCartMixin from '@/mixins/get-shopping-cart'
+import CartAddControls from './cart-add-controls'
 
 export default {
   name: 'ProductShow',
   components: {
     Loading,
-    TitleComponent
+    TitleComponent,
+		CartAddControls
   },
   mixins: [ShoppingCartMixin],
   props: {
