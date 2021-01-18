@@ -59,7 +59,18 @@ export default {
 			quantity: 1,
 			selectedColorId: null
 		}
-	}
+	},
+	methods: {
+		updateSelectedColor(iri) {
+			this.selectedColorId = iri
+		},
+		addToCart() {
+			this.$emit('add-to-cart', {
+				quantity: this.quantity,
+				selectedColorId: this.selectedColorId
+			})
+		}
+	},
 };
 </script>
 
