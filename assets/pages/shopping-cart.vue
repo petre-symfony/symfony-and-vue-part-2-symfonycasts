@@ -71,6 +71,7 @@ export default {
     }
   },
   async created() {
+		this.loadFeaturedProducts()
     this.colors = (await fetchColors()).data['hydra:member']
   },
   methods: {
@@ -90,7 +91,7 @@ export default {
 				return
 			}
 
-			this.featuredProduct = featuredProducts[0]
+			[this.featuredProduct] = featuredProducts
 		}
   }
 };
