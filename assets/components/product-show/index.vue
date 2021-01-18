@@ -64,8 +64,6 @@ export default {
     return {
       product: null,
       loading: true,
-      quantity: 1,
-      selectedColorId: null
     }
   },
   computed: {

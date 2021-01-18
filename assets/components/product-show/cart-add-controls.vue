@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex align-items-center justify-content-center">
+	<div :class="[$style.component, 'd-flex align-items-center', 'justify-content-center']">
 		<color-selector
 				v-if="product.colors.length !== 0"
 				@color-selected="updateSelectedColor"
@@ -12,7 +12,7 @@
 		>
 		<button
 				class="btn btn-info btn-sm"
-				:disabled="cart === null"
+				:disabled="!allowAddToCart"
 				@click="addToCart"
 		>
 			Add to Cart
@@ -35,6 +35,30 @@ export default {
 	name: 'ProductCartAddControls',
 	components: {
 		ColorSelector,
+	},
+	props: {
+		product: {
+			type: Object,
+			required: true
+		},
+		allowAddToCart: {
+			type: Boolean,
+			required: true
+		},
+		addToCartLoading: {
+			type: Boolean,
+			required: true
+		},
+		addToCartSuccess: {
+			type: Boolean,
+			required: true
+		}
+	},
+	data() {
+		return {
+			quantity: 1,
+			selectedColorId: null
+		}
 	}
 };
 </script>
