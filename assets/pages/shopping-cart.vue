@@ -20,13 +20,16 @@
         <div class="content p-3">
           <loading v-if="completeCart === null" />
           <shopping-cart-list
-              v-if="completeCart"
+              v-if="completeCart && currentState === 'cart'"
               :items="completeCart.items"
               @update-quantity="updateQuantity"
               @remove-from-cart="removeProductFromCart(
                 $event.productId,
                 $event.colorId
               )"
+          />
+          <checkout-form
+            v-if="completeCart && currentState === 'checkout'"
           />
           <div v-if="completeCart && completeCart.items.length > 0">
             <button class="btn btn-primary" @click="switchState">
@@ -46,6 +49,7 @@ import { fetchProductsById, fetchFeaturedProducts } from '@/services/products-se
 import { fetchColors } from '@/services/colors-service'
 import ShoppingCartList from '@/components/shopping-cart'
 import CartSidebar from '@/components/shopping-cart/cart-sidebar'
+import CheckoutForm from '@/components/checkout'
 
 export default {
   name: 'ShoppingCart',
@@ -62,7 +66,8 @@ export default {
     TitleComponent,
     Loading,
     ShoppingCartList,
-		CartSidebar
+		CartSidebar,
+    CheckoutForm
   },
   computed: {
     completeCart() {
