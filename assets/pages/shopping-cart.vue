@@ -82,11 +82,8 @@ export default {
     }
   },
   watch: {
-    cart: {
-      deep: true,
-      handler() {
-        this.loadProducts()
-      }
+    'cart.items.length': function watchCartItemsLength() {
+      this.loadProducts()
     }
   },
   async created() {
