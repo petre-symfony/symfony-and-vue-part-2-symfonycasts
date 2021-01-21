@@ -21,6 +21,7 @@
           :allow-add-to-cart="false"
           :add-to-cart-success="false"
           :product="featuredProduct"
+          add-button-text="+"
       />
     </div>
   </div>

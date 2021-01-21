@@ -15,7 +15,7 @@
 				:disabled="!allowAddToCart"
 				@click="addToCart"
 		>
-			Add to Cart
+      {{ addButtonText }}
 			<i
 					v-show="addToCartLoading"
 					class="fas fa-spinner fa-spin"
@@ -24,6 +24,7 @@
 					v-show="addToCartSuccess"
 					class="fas fa-check"
 			/>
+
 		</button>
 	</div>
 </template>
@@ -52,7 +53,11 @@ export default {
 		addToCartSuccess: {
 			type: Boolean,
 			required: true
-		}
+		},
+    addButtonText: {
+		  type: String,
+      default: 'Add to Cart'
+    }
 	},
 	data() {
 		return {
