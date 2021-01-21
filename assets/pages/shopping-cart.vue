@@ -16,7 +16,7 @@
 				/>
 			</aside>
       <div class="col-xs-12 col-lg-9">
-        <title-component text="Shopping Cart" />
+        <title-component :text="pageTitle" />
         <div class="content p-3">
           <loading v-if="completeCart === null" />
           <shopping-cart-list
@@ -30,7 +30,7 @@
           />
           <div v-if="completeCart && completeCart.items.length > 0">
             <button class="btn btn-primary" @click="switchState">
-              Check Out!
+              {{ buttonText }}
             </button>
           </div>
         </div>
@@ -85,6 +85,16 @@ export default {
         // filter out missing products: they may still be loading
         items: completeItems.filter((item) => item.product)
       }
+    },
+    pageTitle() {
+      return this.currentState === 'cart'
+        ? 'Shopping Cart'
+        : 'Check Out'
+    },
+    buttonText() {
+      return this.currentState === 'cart'
+          ? 'Check Out >>'
+          : '<< Back'
     }
   },
   watch: {
