@@ -29,7 +29,7 @@
               )"
           />
           <div v-if="completeCart && completeCart.items.length > 0">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" @click="switchState">
               Check Out!
             </button>
           </div>
@@ -51,6 +51,7 @@ export default {
   name: 'ShoppingCart',
   data() {
     return {
+      currentState: 'cart',
       products: null,
       colors: null,
 			featuredProduct: null
@@ -113,7 +114,10 @@ export default {
 			}
 
 			[this.featuredProduct] = featuredProducts
-		}
+		},
+    switchState() {
+      this.currentState = this.currentState === 'cart' ? 'checkout' : 'cart'
+    }
   }
 };
 </script>
