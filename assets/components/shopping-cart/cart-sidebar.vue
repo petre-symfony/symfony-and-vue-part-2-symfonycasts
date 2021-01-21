@@ -16,12 +16,19 @@
 
         ${{ price }}
       </h6>
+      <cart-add-controls
+          :add-to-cart-loading="false"
+          :allow-add-to-cart="false"
+          :add-to-cart-success="false"
+          :product="featuredProduct"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import formatPrice from '@/helpers/format-price';
+import formatPrice from '@/helpers/format-price'
+import CartAddControls from '@/components/product-show/cart-add-controls'
 
 export default {
   name: 'ShoppingCartSidebar',
@@ -30,6 +37,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  components: {
+    CartAddControls
   },
   computed: {
     price() {
