@@ -17,11 +17,12 @@
         ${{ price }}
       </h6>
       <cart-add-controls
-          :add-to-cart-loading="false"
-          :allow-add-to-cart="false"
-          :add-to-cart-success="false"
+          :add-to-cart-loading="addToCartLoading"
+          :allow-add-to-cart="allowAddToCart"
+          :add-to-cart-success="addToCartSuccess"
           :product="featuredProduct"
           add-button-text="+"
+          @add-to-cart="$emit('add-to-cart', $event)"
       />
     </div>
   </div>
@@ -38,6 +39,18 @@ export default {
       type: Object,
       required: true,
     },
+    allowAddToCart: {
+      type: Boolean,
+      required: true
+    },
+    addToCartLoading: {
+      type: Boolean,
+      required: true
+    },
+    addToCartSuccess: {
+      type: Boolean,
+      required: true
+    }
   },
   components: {
     CartAddControls
