@@ -20,7 +20,10 @@
             name="fade"
             mode="out-in"
         >
-          <title-component :text="pageTitle" />
+          <title-component
+              :key="currentState"
+              :text="pageTitle"
+          />
         </transition>
         <div class="content p-3">
           <loading v-if="completeCart === null" />
