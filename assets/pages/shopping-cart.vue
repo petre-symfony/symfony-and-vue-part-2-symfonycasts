@@ -36,13 +36,14 @@
               {{ buttonText }}
             </button>
           </div>
-
-          <div
-              v-show="currentState === 'cart'"
-              class="transition-testing"
-          >
-            Testing transitions
-          </div>
+          <transition>
+            <div
+                v-show="currentState === 'cart'"
+                class="transition-testing"
+            >
+              Testing transitions
+            </div>
+          </transition>
         </div>
       </div>
     </div>
