@@ -24,7 +24,8 @@
               mode="out-in"
           >
             <shopping-cart-list
-                v-if="completeCart && currentState === 'cart'"
+                v-if="completeCart"
+                v-show="currentState === 'cart'"
                 :items="completeCart.items"
                 @update-quantity="updateQuantity"
                 @remove-from-cart="removeProductFromCart(
@@ -33,7 +34,8 @@
                 )"
             />
             <checkout-form
-              v-if="completeCart && currentState === 'checkout'"
+              v-if="completeCart"
+              v-show="currentState === 'checkout'"
             />
           </transition>
           <div v-if="completeCart && completeCart.items.length > 0">
