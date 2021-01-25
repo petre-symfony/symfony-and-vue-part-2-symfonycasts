@@ -39,7 +39,6 @@
           <transition>
             <div
                 v-show="currentState === 'cart'"
-                class="transition-testing"
             >
               Testing transitions
             </div>
@@ -150,10 +149,10 @@ export default {
   .content {
     @include light-component;
   }
-  .transition-testing {
-    /*transition: opacity 3s; */
+  .v-enter-active, v-leave-active {
+    transition: opacity 3s;
   }
-  .transition-testing.hidden {
+  .v-enter, .v-leave-to {
     opacity: 0;
   }
 }
