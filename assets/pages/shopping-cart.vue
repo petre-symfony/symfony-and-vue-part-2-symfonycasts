@@ -38,10 +38,8 @@
           </div>
 
           <div
-              :class="{
-                'transition-testing': true,
-                'hidden': currentState === 'checkout'
-              }"
+              v-show="currentState === 'cart'"
+              class="transition-testing"
           >
             Testing transitions
           </div>
@@ -153,7 +151,6 @@ export default {
   }
   .transition-testing {
     transition: opacity 3s;
-    opacity: 1
   }
   .transition-testing.hidden {
     opacity: 0;
