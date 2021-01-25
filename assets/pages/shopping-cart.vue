@@ -151,7 +151,7 @@ export default {
     @include light-component;
   }
   .transition-testing {
-    transition: opacity 3s;
+    /*transition: opacity 3s; */
   }
   .transition-testing.hidden {
     opacity: 0;
