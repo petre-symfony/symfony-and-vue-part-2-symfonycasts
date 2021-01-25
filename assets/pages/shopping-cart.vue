@@ -36,6 +36,15 @@
               {{ buttonText }}
             </button>
           </div>
+
+          <div
+              :class="{
+                'transition-testing': true,
+                'hidden': currentState === 'checkout'
+              }"
+          >
+            Testing transitions
+          </div>
         </div>
       </div>
     </div>
@@ -141,6 +150,12 @@ export default {
 .component :global {
   .content {
     @include light-component;
+  }
+  .transition-testing {
+    opacity: 1
+  }
+  .transition-testing.hidden {
+    opacity: 0;
   }
 }
 </style>
