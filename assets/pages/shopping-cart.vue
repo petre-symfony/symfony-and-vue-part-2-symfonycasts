@@ -19,7 +19,10 @@
         <title-component :text="pageTitle" />
         <div class="content p-3">
           <loading v-if="completeCart === null" />
-          <transition name="fade">
+          <transition
+              name="fade"
+              mode="out-in"
+          >
             <shopping-cart-list
                 v-if="completeCart && currentState === 'cart'"
                 :items="completeCart.items"
@@ -145,7 +148,7 @@ export default {
     @include light-component;
   }
   .fade-enter-active, fade-leave-active {
-    transition: opacity 3s;
+    transition: opacity .2s;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
