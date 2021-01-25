@@ -36,7 +36,7 @@
               {{ buttonText }}
             </button>
           </div>
-          <transition>
+          <transition name="fade">
             <div
                 v-show="currentState === 'cart'"
             >
