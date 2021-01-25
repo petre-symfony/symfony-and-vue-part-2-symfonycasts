@@ -19,30 +19,25 @@
         <title-component :text="pageTitle" />
         <div class="content p-3">
           <loading v-if="completeCart === null" />
-          <shopping-cart-list
-              v-if="completeCart && currentState === 'cart'"
-              :items="completeCart.items"
-              @update-quantity="updateQuantity"
-              @remove-from-cart="removeProductFromCart(
-                $event.productId,
-                $event.colorId
-              )"
-          />
-          <checkout-form
-            v-if="completeCart && currentState === 'checkout'"
-          />
+          <transition name="fade">
+            <shopping-cart-list
+                v-if="completeCart && currentState === 'cart'"
+                :items="completeCart.items"
+                @update-quantity="updateQuantity"
+                @remove-from-cart="removeProductFromCart(
+                  $event.productId,
+                  $event.colorId
+                )"
+            />
+            <checkout-form
+              v-if="completeCart && currentState === 'checkout'"
+            />
+          </transition>
           <div v-if="completeCart && completeCart.items.length > 0">
             <button class="btn btn-primary" @click="switchState">
               {{ buttonText }}
             </button>
           </div>
-          <transition name="fade">
-            <div
-                v-show="currentState === 'cart'"
-            >
-              Testing transitions
-            </div>
-          </transition>
         </div>
       </div>
     </div>
@@ -149,10 +144,10 @@ export default {
   .content {
     @include light-component;
   }
-  .v-enter-active, v-leave-active {
+  .fade-enter-active, fade-leave-active {
     transition: opacity 3s;
   }
-  .v-enter, .v-leave-to {
+  .fade-enter, .fade-leave-to {
     opacity: 0;
   }
 }
