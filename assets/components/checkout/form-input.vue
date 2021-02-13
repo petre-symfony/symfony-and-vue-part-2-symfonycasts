@@ -7,7 +7,7 @@
       {{ label }}
     </label>
     <input
-        type="text"
+        :type="type"
         :class="{
           'is-invalid': !isValid,
           'form-control': true
@@ -45,6 +45,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   },
   computed: {
