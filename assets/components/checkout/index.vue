@@ -1,14 +1,41 @@
 <template>
   <div class="row p-3">
     <div class="col-12">
-      A cool checkout form will appear right here
+      <form >
+        <div class="form-group">
+          <label
+              for="customerName"
+              class="col-form-label"
+          >
+            Name:
+          </label>
+          <input
+              type="text"
+              id="customerName"
+              v-model="form.customerName"
+          >
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index'
+  name: 'CheckoutForm',
+  data() {
+    return {
+      form: {
+        customerName: '',
+        customerEmail: '',
+        customerAddress: '',
+        customerZip: '',
+        customerCity: '',
+        customerPhone: ''
+      },
+      validationErrors: {}
+    }
+  }
 };
 </script>
 
