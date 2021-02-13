@@ -66,6 +66,7 @@
 import FormInput from '@/components/checkout/form-input'
 import Loading from '@/components/loading'
 import { createOrder } from '@/services/checkout-service'
+import { clearCart } from '@/services/cart-service'
 
 export default {
   name: 'CheckoutForm',
@@ -112,7 +113,11 @@ export default {
           ...this.form,
           purchaseItems: this.cart.items
         })
-        console.log(response.data)
+
+        const id = response.data['@id'].substr(response.data['@id'].lastIndexOf('/') + 1)
+        await clearCart()
+
+        window.location = `/confirmation/${id}`
       } catch (error) {
         const { response } = error
 
