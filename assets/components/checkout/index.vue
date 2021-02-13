@@ -3,40 +3,28 @@
     <div class="col-12">
       <form >
         <form-input
-          id="customerName"
           v-model="form.customerName"
-          label="Name:"
-          :error-message="validationErrors.customerName"
+          v-bind="getFieldProps('customerName', 'Name:')"
         />
         <form-input
-          id="customerEmail"
           v-model="form.customerEmail"
-          label="Email:"
-          :error-message="validationErrors.customerEmail"
+          v-bind="getFieldProps('customerEmail', 'Email:')"
         />
         <form-input
-          id="customerAddress"
           v-model="form.customerAddress"
-          label="Address:"
-          :error-message="validationErrors.customerAddress"
+          v-bind="getFieldProps('customerAddress', 'Address:')"
         />
         <form-input
-            id="customerZip"
             v-model="form.customerZip"
-            label="Zip Code:"
-            :error-message="validationErrors.customerZip"
+            v-bind="getFieldProps('customerZip', 'Zip Code:')"
         />
         <form-input
-          id="customerCity"
           v-model="form.customerCity"
-          label="City:"
-          :error-message="validationErrors.customerCity"
+          v-bind="getFieldProps('customerCity', 'City:')"
         />
         <form-input
-          id="customerPhone"
           v-model="form.customerPhone"
-          label="Phone Number:"
-          :error-message="validationErrors.customerPhone"
+          v-bind="getFieldProps('customerPhone', 'Phone Number:')"
         />
       </form>
     </div>
@@ -62,6 +50,15 @@ export default {
         customerPhone: ''
       },
       validationErrors: {}
+    }
+  },
+  methods: {
+    getFieldProps(id, label) {
+      return {
+        id,
+        label,
+        errorMessage: this.validationErrors[id]
+      }
     }
   },
 };
