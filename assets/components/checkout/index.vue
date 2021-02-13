@@ -1,7 +1,7 @@
 <template>
   <div class="row p-3">
     <div class="col-12">
-      <form >
+      <form @submit="onSubmit">
         <div class="form-row">
           <form-input
             v-model="form.customerName"
@@ -65,6 +65,12 @@ export default {
     FormInput,
     Loading
   },
+  props: {
+    cart: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       form: {
@@ -87,13 +93,14 @@ export default {
         errorMessage: this.validationErrors[id]
       }
     },
-    async onSubmit() {
+    async onSubmit(event) {
+      event.preventDefault()
       this.loading = true
 
       try {
         const response = await createOrder({
           ...this.form,
-          purchaseItems: []
+          purchaseItems: this.cart.items
         })
         console.log(response.data)
       } catch (error) {
