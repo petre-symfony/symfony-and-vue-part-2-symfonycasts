@@ -2,30 +2,39 @@
   <div class="row p-3">
     <div class="col-12">
       <form >
-        <form-input
-          v-model="form.customerName"
-          v-bind="getFieldProps('customerName', 'Name:')"
-        />
-        <form-input
-          v-model="form.customerEmail"
-          v-bind="getFieldProps('customerEmail', 'Email:')"
-        />
+        <div class="form-row">
+          <form-input
+            v-model="form.customerName"
+            class="col"
+            v-bind="getFieldProps('customerName', 'Name:')"
+          />
+          <form-input
+            v-model="form.customerEmail"
+            class="col"
+            v-bind="getFieldProps('customerEmail', 'Email:')"
+          />
+        </div>
         <form-input
           v-model="form.customerAddress"
           v-bind="getFieldProps('customerAddress', 'Address:')"
         />
-        <form-input
+        <div class="form-row">
+          <form-input
+            class="col"
             v-model="form.customerZip"
             v-bind="getFieldProps('customerZip', 'Zip Code:')"
-        />
-        <form-input
-          v-model="form.customerCity"
-          v-bind="getFieldProps('customerCity', 'City:')"
-        />
-        <form-input
-          v-model="form.customerPhone"
-          v-bind="getFieldProps('customerPhone', 'Phone Number:')"
-        />
+          />
+          <form-input
+            class="col"
+            v-model="form.customerCity"
+            v-bind="getFieldProps('customerCity', 'City:')"
+          />
+          <form-input
+            class="col"
+            v-model="form.customerPhone"
+            v-bind="getFieldProps('customerPhone', 'Phone Number:')"
+          />
+        </div>
       </form>
     </div>
   </div>
