@@ -1,7 +1,7 @@
 <template>
   <div class="row p-3">
     <div class="col-12">
-      <form @submit="onSubmit">
+      <form @submit.prevent="onSubmit">
         <div class="form-row">
           <form-input
             v-model="form.customerName"
@@ -93,8 +93,7 @@ export default {
         errorMessage: this.validationErrors[id]
       }
     },
-    async onSubmit(event) {
-      event.preventDefault()
+    async onSubmit() {
       this.loading = true
 
       try {
