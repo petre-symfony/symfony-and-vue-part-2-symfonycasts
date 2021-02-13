@@ -11,8 +11,9 @@
           </label>
           <input
               type="text"
+              class="form-control"
               id="customerName"
-              v-model="form.customerName"
+              v-model.trim="form.customerName"
           >
         </div>
       </form>
