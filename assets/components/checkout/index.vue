@@ -2,6 +2,13 @@
   <div class="row p-3">
     <div class="col-12">
       <form @submit.prevent="onSubmit">
+        <div
+            class="alert alert-danger"
+            v-show="serverError"
+        >
+          Well this is embarrassing... Something went wrong!
+          Please try again!
+        </div>
         <div class="form-row">
           <form-input
             v-model="form.customerName"
@@ -82,7 +89,8 @@ export default {
         customerPhone: ''
       },
       validationErrors: {},
-      loading: false
+      loading: false,
+      serverError: false
     }
   },
   methods: {
@@ -95,6 +103,7 @@ export default {
     },
     async onSubmit() {
       this.loading = true
+      this.serverError = false
 
       try {
         const response = await createOrder({
@@ -103,7 +112,13 @@ export default {
         })
         console.log(response.data)
       } catch (error) {
-        console.error(error.response)
+        const { response } = error
+
+        if (response.status !== 400){
+          this.serverError = true
+        } else {
+          console.error(response.data)
+        }
       } finally {
         this.loading = false
       }
