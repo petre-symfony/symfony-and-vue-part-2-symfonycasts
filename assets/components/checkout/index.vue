@@ -39,6 +39,7 @@
         </div>
 
         <div class="form-row justify-content-end align-items-center">
+          <loading v-show="loading" />
           <div class="col-auto">
             <button
                 type="submit"
@@ -55,11 +56,14 @@
 
 <script>
 import FormInput from '@/components/checkout/form-input'
+import Loading from '@/components/loading'
+import { createOrder } from '@/services/checkout-service'
 
 export default {
   name: 'CheckoutForm',
   components: {
-    FormInput
+    FormInput,
+    Loading
   },
   data() {
     return {
@@ -81,6 +85,21 @@ export default {
         id,
         label,
         errorMessage: this.validationErrors[id]
+      }
+    },
+    async onSubmit() {
+      this.loading = true
+
+      try {
+        const response = await createOrder({
+          ...this.form,
+          purchaseItems: []
+        })
+        console.log(response.data)
+      } catch (error) {
+        console.error(error.response)
+      } finally {
+        this.loading = false
       }
     }
   },
