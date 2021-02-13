@@ -49,6 +49,7 @@
           <loading v-show="loading" />
           <div class="col-auto">
             <button
+                :disabled="loading"
                 type="submit"
                 class="btn btn-info btn-lg"
             >
