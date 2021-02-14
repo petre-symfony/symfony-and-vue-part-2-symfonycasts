@@ -138,7 +138,7 @@ export default {
         this.loading = false
       }
     },
-    validateField() {
+    validateField(event) {
       const validationMessages = {
         customerName: 'Please, enter your full name!',
         customerEmail: 'Please, enter your email address!',
@@ -146,6 +146,13 @@ export default {
         customerZip: 'Please, enter your ZIP code!',
         customerCity: 'Please, enter your city!',
         customerPhone: 'Please, provide a phone number!'
+      }
+
+      const validationField = event.target.id
+      if (!this.form[validationField]){
+        this.validationErrors[validationField] = validationMessages[validationField]
+      } else {
+        delete this.validationErrors[validationField]
       }
     }
   },
