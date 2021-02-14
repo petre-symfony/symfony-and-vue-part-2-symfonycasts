@@ -96,7 +96,14 @@ export default {
         customerCity: '',
         customerPhone: ''
       },
-      validationErrors: {},
+      validationErrors: {
+        customerName: null,
+        customerEmail: null,
+        customerAddress: null,
+        customerZip: null,
+        customerCity: null,
+        customerPhone: null
+      },
       loading: false,
       serverError: false
     }
@@ -152,7 +159,7 @@ export default {
       if (!this.form[validationField]){
         this.validationErrors[validationField] = validationMessages[validationField]
       } else {
-        delete this.validationErrors[validationField]
+        this.validationErrors[validationField] = null
       }
     }
   },
