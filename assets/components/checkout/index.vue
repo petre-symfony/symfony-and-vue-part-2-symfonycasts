@@ -14,34 +14,40 @@
             v-model="form.customerName"
             class="col"
             v-bind="getFieldProps('customerName', 'Name:')"
+            @blur="validateField"
           />
           <form-input
             v-model="form.customerEmail"
             class="col"
             type="email"
             v-bind="getFieldProps('customerEmail', 'Email:')"
+            @blur="validateField"
           />
         </div>
         <form-input
           v-model="form.customerAddress"
           v-bind="getFieldProps('customerAddress', 'Address:')"
+          @blur="validateField"
         />
         <div class="form-row">
           <form-input
             class="col"
             v-model="form.customerZip"
             v-bind="getFieldProps('customerZip', 'Zip Code:')"
+            @blur="validateField"
           />
           <form-input
             class="col"
             v-model="form.customerCity"
             v-bind="getFieldProps('customerCity', 'City:')"
+            @blur="validateField"
           />
           <form-input
             class="col"
             type="tel"
             v-model="form.customerPhone"
             v-bind="getFieldProps('customerPhone', 'Phone Number:')"
+            @blur="validateField"
           />
         </div>
 
@@ -130,6 +136,16 @@ export default {
         }
       } finally {
         this.loading = false
+      }
+    },
+    validateField() {
+      const validationMessages = {
+        customerName: 'Please, enter your full name!',
+        customerEmail: 'Please, enter your email address!',
+        customerAddress: 'Please, enter your street address!',
+        customerZip: 'Please, enter your ZIP code!',
+        customerCity: 'Please, enter your city!',
+        customerPhone: 'Please, provide a phone number!'
       }
     }
   },
